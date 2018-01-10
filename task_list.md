@@ -1,54 +1,45 @@
-## This is a test.
+## This is a task list for Community Maps Project
 
-> Here is some indented text
->> even more indented
-
-## Titles
-# Big title (h1)
-## Middle title (h2)
-### Smaller title (h3)
-#### and so on (hX)
-##### and so on (hX)
-###### and so on (hX)
-
-## Example lists (1)
-
- - bullets can be `-`, `+`, or `*`
- - bullet list 1
- - bullet list 2
-    - sub item 1
-    - sub item 2
-    - ubs as sas
-
-        with indented text inside
-
- - bullet list 3
- + bullet list 4
- * bullet list 5
-
-## Links
-
-```python
-import random
-
-class CardGame(object):
-    """ a sample python class """
-    NB_CARDS = 32
-    def __init__(self, cards=5):
-        self.cards = random.sample(range(self.NB_CARDS), 5)
-        print 'ready to play'
-```
-
-### this is a task list
-- [ ] want to know
-- [ ] I don't know
-- [x] I know
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+- [x] Read documentation, generate a task list
+- [x] Requirement analysis
+      - Using **Knockout framework** to deal with dynamic info of **list**, **filter** and **any other dynamic info on the page**
+      - Error alert needed
+      - At least 5 places near you or you are inestered in as default places, list them in **view**
+      - Provide a filter that filt the list view and markers when loading
+      - Using **AJAX** to add API for Yelp comments, Wikipedia, Flickr etc. when places was selected
+      - Add animation for markers or list view
+      - Show info of selected places or marker when click
+      - Applied on different devices
+- [ ] Analysis completion
+      - **UI design**
+        - [x] All app components are responsive
+        - [x] Applied on different devices on PC, Pod and mobile
+      - **Main Function**
+        - Place filter
+          - [ ] Text input that can filt markers and list all matched places
+        - List view
+          - [ ] List with place name, shows all places as default, sub places after filter condition
+          - [ ] show info when click the place and markers response with animation at same time
+          - [ ] Responsive list
+        - Map and markers
+          - [ ] Map shows all places as default, sub places after filter condition
+          - [ ] Show info when click the marker
+          - [ ] Markers animated when clicked
+      - **App Framework**
+        - [ ] Using MVVM mode and obserbales bind data
+        - [ ] Avoid to use Knockout.js to deal with Google Map API
+        - [ ] 5 places in mode can be hardcode or pull from data API
+      - **Async data usage**
+        - [ ] Using Google Maps API and at least one thrid party API, all data called back asynchronously
+        - [ ] Error handling: Using AJAX error handle methods
+      - **Detailed Place function**
+        - [ ] More places data, shows in inforWindow or DOM
+        - [ ] Add attributes on other data
+        - [ ] No running error
+        - [ ] Responsiveness
+      - **Documentation**
+        - [ ] Long comments on code
+        - [ ] RAEDME contains all detailed process
+        - [ ] Good code quality
+- [ ] Submit assignment
+- [ ] Read code review, fix code accordingly

@@ -1,0 +1,21 @@
+{
+  "name": "bower.json",
+  "authors": [
+    "Wenxi Zhou <vic.zwx1990@gmail.com>"
+  ],
+  "description": "package file",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "knockout.js#^3.1.0"
+  }
+}
