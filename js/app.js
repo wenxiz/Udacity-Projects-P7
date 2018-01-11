@@ -49,19 +49,33 @@ function initMap() {
 }
 
 var Neiborhoods = function(data) {
-    this.titles = ko.observableArray(["Queen Amannisa", "Ted's Montana Grill", "Founding Farmers", "CIRCA", "Daikaya", "Zaytinya", "Shake Shack", "Lauriol Plaza", "Pho 75", "Tom Yum District"]);
-    this.neighborhoods = ko.observableArray(["Crystal City", "Foggy Bottom", "China Town", "Dupont Circle", "Rosslyn"]);
+    this.neighborhoods = ko.observableArray(data.neighborhood);
 
+}
+
+var Restaurants = function(data) {
+    this.titles = ko.observableArray(data.title);
 }
 
 var ViewModel = function() {
     var self = this;
-    this.currentNeiborhoods = ko.observable(new Neiborhoods());
+    // Put neighborhood data under neighborhoodList
+    this.neighborhoodList = ko.observableArray([]);
+    neighborObjArray.forEach(function(neighborhoodItem) {
+        self.neighborhoodList.push(neighborhoodItem);
+    });
+
+    this.currentNeighborhoods = ko.observable(this.neighborhoodList()[0]);
+
+    // Put restaurants data under restaurantsList
+    this.restaurantsList = ko.observableArray([]);
+    neighborObjArray.forEach(function(neighborhoodItem) {
+        self.restaurantsList.push(neighborhoodItem);
+    });
    }
 
 // Apply bindings to ViewModel
 ko.applyBindings(new ViewModel());
-
 
 
 

@@ -61,7 +61,7 @@
 
     <!-- Main Menu -->
     <div class="side-menu-container">
-        <ul class="nav navbar-nav" data-bind="with: currentNeiborhoods">
+        <ul class="nav navbar-nav">
 
             <!-- Dropdown Neighborhoods-->
             <li class="panel panel-default" id="dropdown">
@@ -72,8 +72,8 @@
                 <!-- Dropdown Sub list of Neighborhoods -->
                 <div id="dropdown-1" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <ul class="nav navbar-nav" data-bind="foreach: neighborhoods">
-                            <li><a data-bind="text: $data"></a></li>
+                        <ul class="nav navbar-nav" data-bind="foreach: neighborhoodList">
+                            <li><a data-bind="text: neighborhood"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -104,8 +104,8 @@
                 <!-- Dropdown level 1 -->
                 <div id="dropdown-3" class="panel-collapse collapse">
                     <div class="panel-body">
-                        <ul class="nav navbar-nav" data-bind="foreach: titles">
-                            <li><a data-bind="text: $data"></a></li>
+                        <ul class="nav navbar-nav" data-bind="foreach: restaurantsList">
+                            <li><a data-bind="text: title"></a></li>
                         </ul>
                     </div>
                 </div>
