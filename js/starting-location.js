@@ -59,5 +59,5 @@ var neighborObjArray = [
 	location: {lat: 38.8948576, lng: -77.07439719999999},
 	id: "ChIJlTNyp162t4kRIYV6nEzyCxA",
 	neighborhood: "Rosslyn"
-},
+}
 ]

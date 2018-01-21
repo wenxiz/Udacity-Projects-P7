@@ -107,55 +107,19 @@ function initMap() {
     // Use street view service to get cloest street view images within 50 meters of marker's position
     streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
     infowindow.open(map, marker);
+        }
     }
 }
-        
-
-    
-
-
-    // // Create a searchbox to excute a places search
-    // var searchBox = new google.maps.places.SearchBox(
-    //     document.getElementById('places-search'))
-    // // Bias the searchbox to within the bounds of map.
-    // searchBox.setBounds(map.getBounds());
-
-    // // Listen for the event fired when the user selects a prediction and clicks
-    // // "go" more details for that place.
-    // document.getElementById('go-places').addEventListener('click', textSearchPlaces);
-
-    // This function firest when the user selecet "√" on the places search.
-    // It will do a nearby search using the entered query string or place.
-}
-
-// var Neiborhoods = function(data) {
-//     this.neighborhoods = ko.observableArray(data.id);
-//     console.log(123123123);
-// }
-
-// var Restaurants = function(data) {
-//     this.titles = ko.observableArray(data.title);
-// }
 
 var ViewModel = function() {
     var self = this;
     // Put neighborhood data under neighborhoodList
-    var neighborhoodNameList = [];
+    var neighborhoods = neighborObjArray.reduce(function(acc, curr){
+        return [...acc, curr.neighborhood];
+    }, []);
     // Get distinct neighborhood value from neighborObjArray
-    // var distNeighborhood = ko.utils.arrayGetDistinctValues()
-    this.neighborhoodList = ko.observableArray([]);
-    neighborObjArray.forEach(function(neighborhoodItem) {
-        var neighborhoodName = neighborhoodItem.neighborhood;
-        if (neighborhoodNameList.includes(neighborhoodName)) {
-
-        }
-        else {
-            self.neighborhoodList.push(neighborhoodItem);
-            neighborhoodNameList.push(neighborhoodName);
-        }
-    });
-
-    this.currentNeighborhoods = ko.observable(this.neighborhoodList()[0]);
+    this.neighborhoodList = ko.observableArray(
+        ko.utils.arrayGetDistinctValues(neighborhoods));
 
     // Put restaurants data under restaurantsList
     this.restaurantsList = ko.observableArray([]);
@@ -166,6 +130,7 @@ var ViewModel = function() {
 
 // Apply bindings to ViewModel
 ko.applyBindings(new ViewModel());
+
 
 
 
