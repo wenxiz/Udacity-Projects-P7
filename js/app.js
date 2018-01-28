@@ -2,8 +2,8 @@ var map = {};
 // Create a new blank array for all the listing markers.
 var markers = [];
 var infoWindow = {};
-var apiURL = "https://api.yelp.com/v3/businesses/search"
-
+var apiURL = "https://api.yelp.com/v3/businesses/search";
+var YelpApiKey = "To-MyytcNW6NWL6ZVg4OhVYRc7gew8KiiPI36greCTFKHWBbLLcTntzeAWVFPASzrBXyz92Lm3OOq6etWR1xLFazxtBV7Sq_f73JzguaREhdmIWX3wuX819FK85nWnYx";
 // The orignal js is from: https://bootsnipp.com/snippets/featured/admin-side-menu
 // Use this snippets to complement function on side menu
 $(function () {
@@ -122,6 +122,24 @@ var ViewModel = function() {
             }, 2000);
             }
         }
+        console.log(marker.position.lat);
+
+        // Request data with AJAX
+        $.ajax({
+            url: apiURL + "&latitude=" + marker.position.lat + "&longitude=" + marker.position.lng,
+            dataType: 'json',
+            timeOut: 5000
+        })
+        .done(function(data) {
+            infowindow.setContent(data.businesses[0].price);
+            infowindow.open(map, marker);
+        })
+        .fail(function() {
+            console.log("Error")
+            // alert("Oops! Failed to load api");
+        });   
+    });
+
 
     self.filteredList = ko.computed(function() {
         return ko.utils.arrayFilter(self.placesList(), function(place){
@@ -177,27 +195,17 @@ var ViewModel = function() {
                    '<div>No Street View Found</div>');
             }
         }
-
-        // Request data with AJAX
-        $.ajax({
-            url: apiURL + marker.title,
-            dataType: 'json',
-            timeOut: 5000
-        })
-        .done(function(data) {
-            infowindow.setContent(data.businesses[0].price);
-            infowindow.open(map, marker);
-        })
-        .fail(function() {
-            console.log("error");
-        });   
-    });
         // Use street view service to get cloest street view images within 50 meters of marker's position
         streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
         infowindow.open(map, marker);
             // console.log(markers.length);
         }
     }
+}
+
+// Fail to load google map
+function googleError() {
+     alert("Oops! Failed to load google map!");
 }
 
 
