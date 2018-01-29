@@ -2,8 +2,11 @@ var map = {};
 // Create a new blank array for all the listing markers.
 var markers = [];
 var infoWindow = {};
-var apiURL = "https://api.yelp.com/v3/businesses/search";
-var YelpApiKey = "To-MyytcNW6NWL6ZVg4OhVYRc7gew8KiiPI36greCTFKHWBbLLcTntzeAWVFPASzrBXyz92Lm3OOq6etWR1xLFazxtBV7Sq_f73JzguaREhdmIWX3wuX819FK85nWnYx";
+// Foursquare API Client
+var foursquareUrl = "https://api.foursquare.com/v2/venues/";
+var clientID = '&client_id=PPJCMNGT53VGKCOI3L5XF4LQUZKEAMHBOC3VXQOT5IPT3V3R';
+    clientSecret = '&client_secret=0ZF4N3S3MYQIKTIWT1TW3OZVPYKJTWJDGXXT3R3FK5N1BVK0';
+
 // The orignal js is from: https://bootsnipp.com/snippets/featured/admin-side-menu
 // Use this snippets to complement function on side menu
 $(function () {
@@ -22,13 +25,8 @@ $(function () {
 
         /// uncomment code for absolute positioning tweek see top comment in css
         //$('.absolute-wrapper').removeClass('slide-in');
-
     });
 });
-
-// var filterText = ko.observable("");
-
-
 
 // Google Maps API
 // Create a map object and specify the DOM element for display
@@ -43,39 +41,6 @@ function initMap() {
 
     // Apply bindings to ViewModel
     ko.applyBindings(new ViewModel());
-
-    // // The following groups use neighborObjArray to creat an array of markers on initialize.
-    // for (var i = 0; i < neighborObjArray.length; i++) {
-    //     // Get the position from neighborObjArray array
-    //     var position = neighborObjArray[i].location;
-    //     var title = neighborObjArray[i].title;
-    //     var id = neighborObjArray[i].id;
-    //     // Create marker per location and put into markers array
-    //     var marker = new google.maps.Marker({
-    //         map: map,
-    //         position: position,
-    //         title: title,
-    //         animation: google.maps.Animation.DROP,
-    //         id: id
-    //     });
-    //     // Push marker into markers array
-    //     markers.push(marker);
-
-
-    //     // Create onclick events to open an infoWindow at each marker and add animation on each marker
-    //     marker.addListener('click', function(){
-    //         populateInfoWindow(this, largeInfowindow);
-    //         
-    //     });
-    //     // Extends the boundaries for each markers
-    //     bounds.extend(markers[i].position);
-    // }
-    // map.fitBounds(bounds);
-
-    
-    // This function pupulates the infoWindow when the marker is clicked.
-    
-    
 }
 
 var Marker = function(markerItem) {
@@ -93,7 +58,9 @@ var ViewModel = function() {
     self.placesList = ko.observableArray([]);
     self.searchInput = ko.observable('');
 
-    neighborObjArray.forEach(function(data) {
+    neighborObjArray.forEach(function(data) {  
+        var api_url = foursquareUrl + data.id + '/tips?' + clientID + clientSecret + '&v=20180128';
+
         var place = new Place(data);
         // Marker information
         var marker = new google.maps.Marker({
@@ -106,11 +73,7 @@ var ViewModel = function() {
         // Pushes marker to markers array
         place.marker = marker;
         self.placesList.push(place)
-        // Marker and infowindow event listener
-        marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
-            toggleBounce();
-        });
+
         // This function add animation on markers when click on markers
         function toggleBounce() {
             if (marker.getAnimation() !== null) {
@@ -122,22 +85,22 @@ var ViewModel = function() {
             }, 2000);
             }
         }
-        console.log(marker.position.lat);
-
         // Request data with AJAX
-        $.ajax({
-            url: apiURL + "&latitude=" + marker.position.lat + "&longitude=" + marker.position.lng,
+        var data = $.ajax({
+            url: api_url,
+            data: {format: 'json'},
             dataType: 'json',
-            timeOut: 5000
-        })
-        .done(function(data) {
-            infowindow.setContent(data.businesses[0].price);
-            infowindow.open(map, marker);
+            timeOut: 20
         })
         .fail(function() {
-            console.log("Error")
-            // alert("Oops! Failed to load api");
+            alert("Oops! Failed to load api");
         });   
+
+        // Marker and infowindow event listener
+        marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow, data);
+            toggleBounce();
+        });
     });
 
 
@@ -160,7 +123,9 @@ var ViewModel = function() {
     // Create infoWindow to show details on each restaurant
     var largeInfowindow = new google.maps.InfoWindow();
     var bounds = new google.maps.LatLngBounds();
-    function populateInfoWindow(marker, infowindow) {
+    function populateInfoWindow(marker, infowindow, data) {
+        // Pull tips text from Foursquare API
+        var text = data.responseJSON.response.tips.items[0].text;
         // Check to make sure the infoWindow is not already opened on this marker.
         if (infowindow.marker != marker) {
             // infowindow.setContent('<div>' + marker.title + '</div>');
@@ -180,7 +145,7 @@ var ViewModel = function() {
                 var nearStreetViewLocation = data.location.latLng;
                 var heading = google.maps.geometry.spherical.computeHeading(
                     nearStreetViewLocation, marker.position);
-                    infowindow.setContent('<div style="font-size: 18px; color: #051487;">' + marker.title + '</div><div id="pano">123</div>');
+                    infowindow.setContent('<div style="font-size: 18px; color: #051487;">' + marker.title + '</div><div id="pano"></div>' + '<div id="tips">' + text + '</div>');
                     var panoramaOptions = {
                         position: nearStreetViewLocation,
                         pov: {
@@ -198,7 +163,6 @@ var ViewModel = function() {
         // Use street view service to get cloest street view images within 50 meters of marker's position
         streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
         infowindow.open(map, marker);
-            // console.log(markers.length);
         }
     }
 }

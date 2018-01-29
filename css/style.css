@@ -36,3 +36,8 @@ html, body {
 .text {
     font-size: 12px;
       }
+
+#tips {
+    width: 200px;
+    padding: 5px;
+}

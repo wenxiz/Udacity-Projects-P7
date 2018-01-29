@@ -8,7 +8,7 @@ Using google maps API to implement great restaurants abournd DC Metro Area. The 
 
 ## APIs
 
-Google Maps API is used to show the map and generate the markers etc. Yelp API is used to pull more infomation of restaurants.
+Google Maps API is used to show the map and generate the markers etc. Foursquare API is used to pull more infomation of restaurants.
 
 ## Contents
 
