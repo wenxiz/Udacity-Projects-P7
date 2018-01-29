@@ -4,7 +4,7 @@ This is a single page application which contains a certain area information. Thi
 
 ## Freatures
 
-Using google maps API to implement great restaurants abournd DC Metro Area. The site is fully responsive and can run in different devices like Pad and mobile. You get a full screen Google Map, populated with my favorite locations, along with a sidebar with a list of the locations that can be clicked on and also filtered so you can nail down what you want without any other distractions. You can also get panorama even inside view of restaurants and of course average price as reference.
+Using google maps API to implement great restaurants abournd DC Metro Area. The site is fully responsive and can run in different devices like Pad and mobile. You get a full screen Google Map, populated with my favorite locations, along with a sidebar with a list of the locations that can be clicked on and also filtered so you can nail down what you want without any other distractions. You can also get panorama even inside view of restaurants and of course tips as reference.
 
 ## APIs
 
