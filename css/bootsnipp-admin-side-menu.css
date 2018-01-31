@@ -60,6 +60,7 @@ Made some changes to fit this project*/
 }
 .side-menu .navbar-nav li a .glyphicon {
   padding-right: 10px;
+  /*padding-left: 10px;*/
 }
 .side-menu #dropdown {
   border: 0;

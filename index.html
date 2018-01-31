@@ -1,123 +1,92 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta lang="en">
-		<meta charset="utf-8">
-		<title>Neighborhood Map</title>
-			<meta name="viewport" content="width=device-width,
-			initial-scale=1">
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/bootsnipp-admin-side-menu.css">
-	</head>
-	<body>
-		<!-- side bar -->
-		<!-- The orignal html is from: https://bootsnipp.com/snippets/featured/admin-side-menu
-		Made lots of changes to fit on this project  -->
-		<div class="row">
-    <!-- uncomment code for absolute positioning tweek see top comment in css -->
-    <!-- <div class="absolute-wrapper"> </div> -->
-    <!-- Menu -->
-    <div class="side-menu">
-    
-    <nav class="navbar navbar-default" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <div class="brand-wrapper">
-            <!-- Hamburger -->
-            <button type="button" class="navbar-toggle">
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Neighborhood Map</title>
+    <meta name="viewport" content="width=device-width,
+            initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootsnipp-admin-side-menu.css">
+</head>
+
+<body>
+    <!-- side bar -->
+    <!-- The orignal html is from: https://bootsnipp.com/snippets/featured/admin-side-menu
+        Made lots of changes to fit on this project  -->
+    <div class="row">
+        <!-- uncomment code for absolute positioning tweek see top comment in css -->
+        <!-- <div class="absolute-wrapper"> </div> -->
+        <!-- Menu -->
+        <div class="side-menu">
+
+            <nav class="navbar navbar-default" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <div class="brand-wrapper">
+                        <!-- Hamburger -->
+                        <button type="button" class="navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <!-- Brand -->
-            <div class="brand-name-wrapper">
-                <a class="navbar-brand" href="#">
+                        <!-- Brand -->
+                        <div class="brand-name-wrapper">
+                            <a class="navbar-brand" href="#">
                     Neighborhood Map
                 </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Menu -->
+                <div class="side-menu-container">
+                    <!-- Search -->
+                    <div class="nav navbar-nav">
+
+                        <ul class="listItem">
+                            <input data-bind="value: searchInput, valueUpdate: 'keyup'" class="search" placeholder="Search Locations...">
+                            <!-- Dropdown Restaurants-->
+                            <li class="panel panel-default" id="dropdown">
+                                <a data-toggle="collapse" href="#dropdown-3">
+                                    <span class="glyphicon glyphicon-glass"></span> Restaurants <span class="caret"></span>
+                                </a>
+
+                                <!-- Dropdown level 1 -->
+                                <div id="dropdown-3" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <ul class="nav navbar-nav" data-bind="foreach: filteredList">
+                                            <li>
+                                                <a data-bind="text: title, click: $parent.placeClicked"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body">
+                <div id="map"></div>
             </div>
-
-            
-        </div>
-
-    </div>
-
-    <!-- Main Menu -->
-    <div class="side-menu-container">
-        <ul class="nav navbar-nav">
-            <!-- Search -->
-            <input data-bind="value: searchInput, valueUpdate: 'keyup'" class="search" placeholder="Search Locations...">
-        	
-
-            <!-- Dropdown Neighborhoods-->
-           <!--  <li class="panel panel-default" id="dropdown">
-                <a data-toggle="collapse" href="#dropdown-1" class="drop-category">
-                    <span class="glyphicon glyphicon-picture"></span> Neighborhoods <span class="caret"></span>
-                </a> -->
-
-                <!-- Dropdown Sub list of Neighborhoods -->
-              <!--   <div id="dropdown-1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class="nav navbar-nav" data-bind="foreach: neighborhoodList">
-                            <li><a data-bind="text: $data"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li> -->
-            <!-- Dropdown Apartments-->
-           <!--  <li class="panel panel-default" id="dropdown">
-                <a data-toggle="collapse" href="#dropdown-2">
-                    <span class="glyphicon glyphicon-asterisk"></span> Apartments <span class="caret"></span>
-                </a> -->
-
-                <!-- Dropdown Sub list of Apartments -->
-             <!--    <div id="dropdown-2" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class="nav navbar-nav">
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li> -->
-            <!-- Dropdown Restaurants-->
-            <li class="panel panel-default" id="dropdown">
-                <a data-toggle="collapse" href="#dropdown-3">
-                    <span class="glyphicon glyphicon-glass"></span> Restaurants <span class="caret"></span>
-                </a>
-
-                <!-- Dropdown level 1 -->
-                <div id="dropdown-3" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class="nav navbar-nav" data-bind="foreach: filteredList">
-                            <li><a data-bind="text: title, click: $parent.placeClicked"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div><!-- /.navbar-collapse -->
-</nav>
-    
-    </div>
-
-    <!-- Main Content -->
-    <div class="container-fluid">
-        <div class="side-body">
- 					<div id="map"></div>
         </div>
     </div>
-</div>
-		<script src="bower_components/knockout/knockout.js"/></script>
-		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="bower_components/knockout/knockout.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="js/starting-location.js"></script>
-		<script src="js/app.js"></script>
-		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&v=3&key=AIzaSyDwMnueJckGATizOaL2mumzKpO6jlF_N3M&callback=initMap">
-			</script>
-	</body>
+    <script src="js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&v=3&key=AIzaSyDwMnueJckGATizOaL2mumzKpO6jlF_N3M&callback=initMap" onerror="googleError()">
+    </script>
+</body>
+
 </html>
