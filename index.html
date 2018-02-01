@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Neighborhood Map</title>
-    <meta name="viewport" content="width=device-width,
-            initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootsnipp-admin-side-menu.css">
@@ -21,7 +20,7 @@
         <!-- Menu -->
         <div class="side-menu">
 
-            <nav class="navbar navbar-default" role="navigation">
+            <nav class="navbar navbar-default">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <div class="brand-wrapper">
@@ -45,9 +44,8 @@
                 <div class="side-menu-container">
                     <!-- Search -->
                     <div class="nav navbar-nav">
-
+                        <input data-bind="value: searchInput, valueUpdate: 'keyup'" class="search" placeholder="Search Locations...">
                         <ul class="listItem">
-                            <input data-bind="value: searchInput, valueUpdate: 'keyup'" class="search" placeholder="Search Locations...">
                             <!-- Dropdown Restaurants-->
                             <li class="panel panel-default" id="dropdown">
                                 <a data-toggle="collapse" href="#dropdown-3">
